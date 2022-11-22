@@ -1,0 +1,6 @@
+generatorName: surefyre-remote-call
+outputDir: samples/client/petstore/surefyre/remote/call
+inputSpec: modules/openapi-generator/src/test/resources/3_0/petstore.yaml
+templateDir: modules/openapi-generator/src/main/resources/surefyre-remote-call
+additionalProperties:
+  hideGenerationTimestamp: "true"

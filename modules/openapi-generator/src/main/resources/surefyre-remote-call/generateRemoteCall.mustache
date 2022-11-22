@@ -1,0 +1,687 @@
+/* REMOTE CALL GENERATOR */
+
+/*--------------------MODEL SCHEMAS--------------------*/
+function getModel(name) {
+  let modelLookup = {
+    {{#models}}
+    {{#model}}
+    "{{classname}}": {{classname}}(){{^-last}},{{/-last}}
+    {{/model}}
+    {{/models}}
+  }
+  {{#models}}
+  {{#model}}
+  function {{classname}}() {
+    return {
+      {{#allVars}}
+      {{#isModel}}
+      "{{baseName}}": {
+        "type": {{openApiType}}(),
+        "required": {{#required}}true{{/required}}{{^required}}false{{/required}}
+      }{{^-last}},{{/-last}}
+      {{/isModel}}
+      {{#isString}}
+      {{^isEnum}}
+      "{{baseName}}": {
+        "type": "rest_framework.serializers.CharField",
+        "attrs": {},
+        "required": {{#required}}true{{/required}}{{^required}}false{{/required}}
+      }{{^-last}},{{/-last}}
+      {{/isEnum}}
+      {{/isString}}
+      {{#isEmail}}
+      "{{baseName}}": {
+        "type": "rest_framework.serializers.CharField",
+        "attrs": {},
+        "required": {{#required}}true{{/required}}{{^required}}false{{/required}}
+      }{{^-last}},{{/-last}}
+      {{/isEmail}}
+      {{#isInteger}}
+      {{^isShort}}
+      "{{baseName}}": {
+        "type": "rest_framework.serializers.IntegerField",
+        "attrs": {},
+        "required": {{#required}}true{{/required}}{{^required}}false{{/required}}
+      }{{^-last}},{{/-last}}
+      {{/isShort}}
+      {{/isInteger}}
+      {{#isShort}}
+      "{{baseName}}": {
+        "type": "rest_framework.serializers.IntegerField",
+        "attrs": {},
+        "required": {{#required}}true{{/required}}{{^required}}false{{/required}}
+      }{{^-last}},{{/-last}}
+      {{/isShort}}
+      {{#isLong}}
+      "{{baseName}}": {
+        "type": "rest_framework.serializers.IntegerField",
+        "attrs": {},
+        "required": {{#required}}true{{/required}}{{^required}}false{{/required}}
+      }{{^-last}},{{/-last}}
+      {{/isLong}}
+      {{#isBoolean}}
+      "{{baseName}}": {
+        "type": "rest_framework.serializers.BooleanField",
+        "attrs": {},
+        "required": {{#required}}true{{/required}}{{^required}}false{{/required}}
+      }{{^-last}},{{/-last}}
+      {{/isBoolean}}
+      {{#isNumber}}
+      "{{baseName}}": {
+        "type": "rest_framework.serializers.FloatField",
+        "attrs": {},
+        "required": {{#required}}true{{/required}}{{^required}}false{{/required}}
+      }{{^-last}},{{/-last}}
+      {{/isNumber}}
+      {{#isFloat}}
+      "{{baseName}}": {
+        "type": "rest_framework.serializers.FloatField",
+        "attrs": {},
+        "required": {{#required}}true{{/required}}{{^required}}false{{/required}}
+      }{{^-last}},{{/-last}}
+      {{/isFloat}}
+      {{#isDouble}}
+      "{{baseName}}": {
+        "type": "rest_framework.serializers.FloatField",
+        "attrs": {},
+        "required": {{#required}}true{{/required}}{{^required}}false{{/required}}
+      }{{^-last}},{{/-last}}
+      {{/isDouble}}
+      {{#isDecimal}}
+      "{{baseName}}": {
+        "type": "site_utils.fields.DecimalField",
+        "attrs": {},
+        "required": {{#required}}true{{/required}}{{^required}}false{{/required}}
+      }{{^-last}},{{/-last}}
+      {{/isDecimal}}
+      {{#isDate}}
+      "{{baseName}}": {
+        "type": "rest_framework.serializers.DateField",
+        "attrs": {},
+        "required": {{#required}}true{{/required}}{{^required}}false{{/required}}
+      }{{^-last}},{{/-last}}
+      {{/isDate}}
+      {{#isDateTime}}
+      "{{baseName}}": {
+        "type": "rest_framework.serializers.DateTimeField",
+        "attrs": {},
+        "required": {{#required}}true{{/required}}{{^required}}false{{/required}}
+      }{{^-last}},{{/-last}}
+      {{/isDateTime}}
+      {{#isUuid}}
+      "{{baseName}}": {
+        "type": "rest_framework.serializers.UUIDField",
+        "attrs": {},
+        "required": {{#required}}true{{/required}}{{^required}}false{{/required}}
+      }{{^-last}},{{/-last}}
+      {{/isUuid}}
+      {{#isEnum}}
+      "{{baseName}}": {
+        "type": "site_utils.fields.MappedChoiceField",
+        "attrs": {
+          "mapping": {
+            {{#_enum}}
+            "MAPPING_FOR_{{.}}": "{{.}}"{{^-last}},{{/-last}}
+            {{/_enum}}
+          }
+        },
+        "required": {{#required}}true{{/required}}{{^required}}false{{/required}}
+      }{{^-last}},{{/-last}}
+      {{/isEnum}}
+      {{#isArray}}
+      "{{baseName}}": {
+        "many": true,
+        {{#items}}
+        {{#isModel}}
+        "type": {{openApiType}}(),
+        "required": {{#required}}true{{/required}}{{^required}}false{{/required}}
+        {{/isModel}}
+        {{#isString}}
+        {{^isEnum}}
+        "type": "rest_framework.serializers.CharField",
+        "attrs": {},
+        "required": {{#required}}true{{/required}}{{^required}}false{{/required}}
+        {{/isEnum}}
+        {{/isString}}
+        {{#isEmail}}
+        "type": "rest_framework.serializers.CharField",
+        "attrs": {},
+        "required": {{#required}}true{{/required}}{{^required}}false{{/required}}
+        {{/isEmail}}
+        {{#isInteger}}
+        {{^isShort}}
+        "type": "rest_framework.serializers.IntegerField",
+        "attrs": {},
+        "required": {{#required}}true{{/required}}{{^required}}false{{/required}}
+        {{/isShort}}
+        {{/isInteger}}
+        {{#isShort}}
+        "type": "rest_framework.serializers.IntegerField",
+        "attrs": {},
+        "required": {{#required}}true{{/required}}{{^required}}false{{/required}}
+        {{/isShort}}
+        {{#isLong}}
+        "type": "rest_framework.serializers.IntegerField",
+        "attrs": {},
+        "required": {{#required}}true{{/required}}{{^required}}false{{/required}}
+        {{/isLong}}
+        {{#isBoolean}}
+        "type": "rest_framework.serializers.BooleanField",
+        "attrs": {},
+        "required": {{#required}}true{{/required}}{{^required}}false{{/required}}
+        {{/isBoolean}}
+        {{#isNumber}}
+        "type": "rest_framework.serializers.FloatField",
+        "attrs": {},
+        "required": {{#required}}true{{/required}}{{^required}}false{{/required}}
+        {{/isNumber}}
+        {{#isFloat}}
+        "type": "rest_framework.serializers.FloatField",
+        "attrs": {},
+        "required": {{#required}}true{{/required}}{{^required}}false{{/required}}
+        {{/isFloat}}
+        {{#isDouble}}
+        "type": "rest_framework.serializers.FloatField",
+        "attrs": {},
+        "required": {{#required}}true{{/required}}{{^required}}false{{/required}}
+        {{/isDouble}}
+        {{#isDecimal}}
+        "type": "site_utils.fields.DecimalField",
+        "attrs": {},
+        "required": {{#required}}true{{/required}}{{^required}}false{{/required}}
+        {{/isDecimal}}
+        {{#isDate}}
+        "type": "rest_framework.serializers.DateField",
+        "attrs": {},
+        "required": {{#required}}true{{/required}}{{^required}}false{{/required}}
+        {{/isDate}}
+        {{#isDateTime}}
+        "type": "rest_framework.serializers.DateTimeField",
+        "attrs": {},
+        "required": {{#required}}true{{/required}}{{^required}}false{{/required}}
+        {{/isDateTime}}
+        {{#isUuid}}
+        "type": "rest_framework.serializers.UUIDField",
+        "attrs": {},
+        "required": {{#required}}true{{/required}}{{^required}}false{{/required}}
+        {{/isUuid}}
+        {{#isEnum}}
+        "type": "site_utils.fields.MappedChoiceField",
+        "attrs": {
+          "mapping": {
+            {{#_enum}}
+            "MAPPING_FOR_{{.}}": "{{.}}"{{^-last}},{{/-last}}
+            {{/_enum}}
+          }
+        },
+        "required": {{#required}}true{{/required}}{{^required}}false{{/required}}
+        {{/isEnum}}
+        {{/items}}
+      }{{^-last}},{{/-last}}
+      {{/isArray}}
+      {{/allVars}}
+    }
+  }
+  {{/model}}
+  {{/models}}
+  return modelLookup[name];
+}
+/*--------------------LIST OPERATIONS--------------------*/
+export function getEndpoints() {
+  let endpoints = [];
+  {{#apiInfo}}
+  {{#apis}}
+  {{#operations}}
+  {{#operation}}
+  endpoints.push("{{operationId}}");
+  {{/operation}}
+  {{/operations}}
+  {{/apis}}
+  {{/apiInfo}}
+  return endpoints;
+}
+/*--------------------API SCHEMAS--------------------*/
+export function getOperation(name) {
+  return {
+    {{#apiInfo}}
+    {{#apis}}
+    {{#operations}}
+    {{#operation}}
+    "{{operationId}}": {
+      "fullPath": "{{basePath}}{{path}}",
+      "httpMethod": "{{httpMethod}}",
+      "jsonSchema": {
+        {{#allParams}}
+        {{#isBodyParam}}
+        {{#vars}}
+        {{#isModel}}
+        "{{baseName}}": {
+          "type": getModel("{{openApiType}}"),
+          "attrs": {},
+          "required": {{#required}}true{{/required}}{{^required}}false{{/required}}
+        }{{^-last}},{{/-last}}
+        {{/isModel}}
+        {{#isString}}
+        {{^isEnum}}
+        "{{baseName}}": {
+          "type": "rest_framework.serializers.CharField",
+          "attrs": {},
+          "required": {{#required}}true{{/required}}{{^required}}false{{/required}}
+        }{{^-last}},{{/-last}}
+        {{/isEnum}}
+        {{/isString}}
+        {{#isEmail}}
+        "{{baseName}}": {
+          "type": "rest_framework.serializers.CharField",
+          "attrs": {},
+          "required": {{#required}}true{{/required}}{{^required}}false{{/required}}
+        }{{^-last}},{{/-last}}
+        {{/isEmail}}
+        {{#isInteger}}
+        {{^isShort}}
+        "{{baseName}}": {
+          "type": "rest_framework.serializers.IntegerField",
+          "attrs": {},
+          "required": {{#required}}true{{/required}}{{^required}}false{{/required}}
+        }{{^-last}},{{/-last}}
+        {{/isShort}}
+        {{/isInteger}}
+        {{#isShort}}
+        "{{baseName}}": {
+          "type": "rest_framework.serializers.IntegerField",
+          "attrs": {},
+          "required": {{#required}}true{{/required}}{{^required}}false{{/required}}
+        }{{^-last}},{{/-last}}
+        {{/isShort}}
+        {{#isLong}}
+        "{{baseName}}": {
+          "type": "rest_framework.serializers.IntegerField",
+          "attrs": {},
+          "required": {{#required}}true{{/required}}{{^required}}false{{/required}}
+        }{{^-last}},{{/-last}}
+        {{/isLong}}
+        {{#isBoolean}}
+        "{{baseName}}": {
+          "type": "rest_framework.serializers.BooleanField",
+          "attrs": {},
+          "required": {{#required}}true{{/required}}{{^required}}false{{/required}}
+        }{{^-last}},{{/-last}}
+        {{/isBoolean}}
+        {{#isNumber}}
+        "{{baseName}}": {
+          "type": "rest_framework.serializers.FloatField",
+          "attrs": {},
+          "required": {{#required}}true{{/required}}{{^required}}false{{/required}}
+        }{{^-last}},{{/-last}}
+        {{/isNumber}}
+        {{#isFloat}}
+        "{{baseName}}": {
+          "type": "rest_framework.serializers.FloatField",
+          "attrs": {},
+          "required": {{#required}}true{{/required}}{{^required}}false{{/required}}
+        }{{^-last}},{{/-last}}
+        {{/isFloat}}
+        {{#isDouble}}
+        "{{baseName}}": {
+          "type": "rest_framework.serializers.FloatField",
+          "attrs": {},
+          "required": {{#required}}true{{/required}}{{^required}}false{{/required}}
+        }{{^-last}},{{/-last}}
+        {{/isDouble}}
+        {{#isDecimal}}
+        "{{baseName}}": {
+          "type": "site_utils.fields.DecimalField",
+          "attrs": {},
+          "required": {{#required}}true{{/required}}{{^required}}false{{/required}}
+        }{{^-last}},{{/-last}}
+        {{/isDecimal}}
+        {{#isDate}}
+        "{{baseName}}": {
+          "type": "rest_framework.serializers.DateField",
+          "attrs": {},
+          "required": {{#required}}true{{/required}}{{^required}}false{{/required}}
+        }{{^-last}},{{/-last}}
+        {{/isDate}}
+        {{#isDateTime}}
+        "{{baseName}}": {
+          "type": "rest_framework.serializers.DateTimeField",
+          "attrs": {},
+          "required": {{#required}}true{{/required}}{{^required}}false{{/required}}
+        }{{^-last}},{{/-last}}
+        {{/isDateTime}}
+        {{#isUuid}}
+        "{{baseName}}": {
+          "type": "rest_framework.serializers.UUIDField",
+          "attrs": {},
+          "required": {{#required}}true{{/required}}{{^required}}false{{/required}}
+        }{{^-last}},{{/-last}}
+        {{/isUuid}}
+        {{#isEnum}}
+        "{{baseName}}": {
+          "type": "site_utils.fields.MappedChoiceField",
+          "attrs": {
+            "mapping": {
+              {{#_enum}}
+              "MAPPING_FOR_{{.}}": "{{.}}"{{^-last}},{{/-last}}
+              {{/_enum}}
+            }
+          },
+          "required": {{#required}}true{{/required}}{{^required}}false{{/required}}
+        }{{^-last}},{{/-last}}
+        {{/isEnum}}
+        {{#isArray}}
+        "{{baseName}}": {
+          "many": true,
+          {{#items}}
+          {{#isModel}}
+          "type": getModel("{{openApiType}}"),
+          "attrs": {},
+          "required": {{#required}}true{{/required}}{{^required}}false{{/required}}
+          {{/isModel}}
+          {{#isString}}
+          {{^isEnum}}
+          "type": "rest_framework.serializers.CharField",
+          "attrs": {},
+          "required": {{#required}}true{{/required}}{{^required}}false{{/required}}
+          {{/isEnum}}
+          {{/isString}}
+          {{#isEmail}}
+          "type": "rest_framework.serializers.CharField",
+          "attrs": {},
+          "required": {{#required}}true{{/required}}{{^required}}false{{/required}}
+          {{/isEmail}}
+          {{#isInteger}}
+          {{^isShort}}
+          "type": "rest_framework.serializers.IntegerField",
+          "attrs": {},
+          "required": {{#required}}true{{/required}}{{^required}}false{{/required}}
+          {{/isShort}}
+          {{/isInteger}}
+          {{#isShort}}
+          "type": "rest_framework.serializers.IntegerField",
+          "attrs": {},
+          "required": {{#required}}true{{/required}}{{^required}}false{{/required}}
+          {{/isShort}}
+          {{#isLong}}
+          "type": "rest_framework.serializers.IntegerField",
+          "attrs": {},
+          "required": {{#required}}true{{/required}}{{^required}}false{{/required}}
+          {{/isLong}}
+          {{#isBoolean}}
+          "type": "rest_framework.serializers.BooleanField",
+          "attrs": {},
+          "required": {{#required}}true{{/required}}{{^required}}false{{/required}}
+          {{/isBoolean}}
+          {{#isNumber}}
+          "type": "rest_framework.serializers.FloatField",
+          "attrs": {},
+          "required": {{#required}}true{{/required}}{{^required}}false{{/required}}
+          {{/isNumber}}
+          {{#isFloat}}
+          "type": "rest_framework.serializers.FloatField",
+          "attrs": {},
+          "required": {{#required}}true{{/required}}{{^required}}false{{/required}}
+          {{/isFloat}}
+          {{#isDouble}}
+          "type": "rest_framework.serializers.FloatField",
+          "attrs": {},
+          "required": {{#required}}true{{/required}}{{^required}}false{{/required}}
+          {{/isDouble}}
+          {{#isDecimal}}
+          "type": "site_utils.fields.DecimalField",
+          "attrs": {},
+          "required": {{#required}}true{{/required}}{{^required}}false{{/required}}
+          {{/isDecimal}}
+          {{#isDate}}
+          "type": "rest_framework.serializers.DateField",
+          "attrs": {},
+          "required": {{#required}}true{{/required}}{{^required}}false{{/required}}
+          {{/isDate}}
+          {{#isDateTime}}
+          "type": "rest_framework.serializers.DateTimeField",
+          "attrs": {},
+          "required": {{#required}}true{{/required}}{{^required}}false{{/required}}
+          {{/isDateTime}}
+          {{#isUuid}}
+          "type": "rest_framework.serializers.UUIDField",
+          "attrs": {},
+          "required": {{#required}}true{{/required}}{{^required}}false{{/required}}
+          {{/isUuid}}
+          {{#isEnum}}
+          "type": "site_utils.fields.MappedChoiceField",
+          "attrs": {
+            "mapping": {
+              {{#_enum}}
+              "MAPPING_FOR_{{.}}": "{{.}}"{{^-last}},{{/-last}}
+              {{/_enum}}
+            }
+          },
+          "required": {{#required}}true{{/required}}{{^required}}false{{/required}}
+          {{/isEnum}}
+          {{/items}}
+        }{{^-last}},{{/-last}}
+        {{/isArray}}
+        {{/vars}}
+        {{/isBodyParam}}
+        {{#isQueryParam}}
+        {{#schema}}
+        {{#isModel}}
+        "{{baseName}}": {
+          "type": getModel("{{openApiType}}"),
+          "attrs": {},
+          "required": {{#required}}true{{/required}}{{^required}}false{{/required}}
+        }{{^-last}},{{/-last}}
+        {{/isModel}}
+        {{#isString}}
+        {{^isEnum}}
+        "{{baseName}}": {
+          "type": "rest_framework.serializers.CharField",
+          "attrs": {},
+          "required": {{#required}}true{{/required}}{{^required}}false{{/required}}
+        }{{^-last}},{{/-last}}
+        {{/isEnum}}
+        {{/isString}}
+        {{#isEmail}}
+        "{{baseName}}": {
+          "type": "rest_framework.serializers.CharField",
+          "attrs": {},
+          "required": {{#required}}true{{/required}}{{^required}}false{{/required}}
+        }{{^-last}},{{/-last}}
+        {{/isEmail}}
+        {{#isInteger}}
+        {{^isShort}}
+        "{{baseName}}": {
+          "type": "rest_framework.serializers.IntegerField",
+          "attrs": {},
+          "required": {{#required}}true{{/required}}{{^required}}false{{/required}}
+        }{{^-last}},{{/-last}}
+        {{/isShort}}
+        {{/isInteger}}
+        {{#isShort}}
+        "{{baseName}}": {
+          "type": "rest_framework.serializers.IntegerField",
+          "attrs": {},
+          "required": {{#required}}true{{/required}}{{^required}}false{{/required}}
+        }{{^-last}},{{/-last}}
+        {{/isShort}}
+        {{#isLong}}
+        "{{baseName}}": {
+          "type": "rest_framework.serializers.IntegerField",
+          "attrs": {},
+          "required": {{#required}}true{{/required}}{{^required}}false{{/required}}
+        }{{^-last}},{{/-last}}
+        {{/isLong}}
+        {{#isBoolean}}
+        "{{baseName}}": {
+          "type": "rest_framework.serializers.BooleanField",
+          "attrs": {},
+          "required": {{#required}}true{{/required}}{{^required}}false{{/required}}
+        }{{^-last}},{{/-last}}
+        {{/isBoolean}}
+        {{#isNumber}}
+        "{{baseName}}": {
+          "type": "rest_framework.serializers.FloatField",
+          "attrs": {},
+          "required": {{#required}}true{{/required}}{{^required}}false{{/required}}
+        }{{^-last}},{{/-last}}
+        {{/isNumber}}
+        {{#isFloat}}
+        "{{baseName}}": {
+          "type": "rest_framework.serializers.FloatField",
+          "attrs": {},
+          "required": {{#required}}true{{/required}}{{^required}}false{{/required}}
+        }{{^-last}},{{/-last}}
+        {{/isFloat}}
+        {{#isDouble}}
+        "{{baseName}}": {
+          "type": "rest_framework.serializers.FloatField",
+          "attrs": {},
+          "required": {{#required}}true{{/required}}{{^required}}false{{/required}}
+        }{{^-last}},{{/-last}}
+        {{/isDouble}}
+        {{#isDecimal}}
+        "{{baseName}}": {
+          "type": "site_utils.fields.DecimalField",
+          "attrs": {},
+          "required": {{#required}}true{{/required}}{{^required}}false{{/required}}
+        }{{^-last}},{{/-last}}
+        {{/isDecimal}}
+        {{#isDate}}
+        "{{baseName}}": {
+          "type": "rest_framework.serializers.DateField",
+          "attrs": {},
+          "required": {{#required}}true{{/required}}{{^required}}false{{/required}}
+        }{{^-last}},{{/-last}}
+        {{/isDate}}
+        {{#isDateTime}}
+        "{{baseName}}": {
+          "type": "rest_framework.serializers.DateTimeField",
+          "attrs": {},
+          "required": {{#required}}true{{/required}}{{^required}}false{{/required}}
+        }{{^-last}},{{/-last}}
+        {{/isDateTime}}
+        {{#isUuid}}
+        "{{baseName}}": {
+          "type": "rest_framework.serializers.UUIDField",
+          "attrs": {},
+          "required": {{#required}}true{{/required}}{{^required}}false{{/required}}
+        }{{^-last}},{{/-last}}
+        {{/isUuid}}
+        {{#isEnum}}
+        {{^isArray}}
+        "{{baseName}}": {
+          "type": "site_utils.fields.MappedChoiceField",
+          "attrs": {
+            "mapping": {
+              {{#_enum}}
+              "MAPPING_FOR_{{.}}": "{{.}}"{{^-last}},{{/-last}}
+              {{/_enum}}
+            }
+          },
+          "required": {{#required}}true{{/required}}{{^required}}false{{/required}}
+        }{{^-last}},{{/-last}}
+        {{/isArray}}
+        {{/isEnum}}
+        {{#isArray}}
+        "{{baseName}}": {
+          "many": true,
+          {{#items}}
+          {{#isModel}}
+          "type": getModel("{{openApiType}}"),
+          "attrs": {},
+          "required": {{#required}}true{{/required}}{{^required}}false{{/required}}
+          {{/isModel}}
+          {{#isString}}
+          {{^isEnum}}
+          "type": "rest_framework.serializers.CharField",
+          "attrs": {},
+          "required": {{#required}}true{{/required}}{{^required}}false{{/required}}
+          {{/isEnum}}
+          {{/isString}}
+          {{#isEmail}}
+          "type": "rest_framework.serializers.CharField",
+          "attrs": {},
+          "required": {{#required}}true{{/required}}{{^required}}false{{/required}}
+          {{/isEmail}}
+          {{#isInteger}}
+          {{^isShort}}
+          "type": "rest_framework.serializers.IntegerField",
+          "attrs": {},
+          "required": {{#required}}true{{/required}}{{^required}}false{{/required}}
+          {{/isShort}}
+          {{/isInteger}}
+          {{#isShort}}
+          "type": "rest_framework.serializers.IntegerField",
+          "attrs": {},
+          "required": {{#required}}true{{/required}}{{^required}}false{{/required}}
+          {{/isShort}}
+          {{#isLong}}
+          "type": "rest_framework.serializers.IntegerField",
+          "attrs": {},
+          "required": {{#required}}true{{/required}}{{^required}}false{{/required}}
+          {{/isLong}}
+          {{#isBoolean}}
+          "type": "rest_framework.serializers.BooleanField",
+          "attrs": {},
+          "required": {{#required}}true{{/required}}{{^required}}false{{/required}}
+          {{/isBoolean}}
+          {{#isNumber}}
+          "type": "rest_framework.serializers.FloatField",
+          "attrs": {},
+          "required": {{#required}}true{{/required}}{{^required}}false{{/required}}
+          {{/isNumber}}
+          {{#isFloat}}
+          "type": "rest_framework.serializers.FloatField",
+          "attrs": {},
+          "required": {{#required}}true{{/required}}{{^required}}false{{/required}}
+          {{/isFloat}}
+          {{#isDouble}}
+          "type": "rest_framework.serializers.FloatField",
+          "attrs": {},
+          "required": {{#required}}true{{/required}}{{^required}}false{{/required}}
+          {{/isDouble}}
+          {{#isDecimal}}
+          "type": "site_utils.fields.DecimalField",
+          "attrs": {},
+          "required": {{#required}}true{{/required}}{{^required}}false{{/required}}
+          {{/isDecimal}}
+          {{#isDate}}
+          "type": "rest_framework.serializers.DateField",
+          "attrs": {},
+          "required": {{#required}}true{{/required}}{{^required}}false{{/required}}
+          {{/isDate}}
+          {{#isDateTime}}
+          "type": "rest_framework.serializers.DateTimeField",
+          "attrs": {},
+          "required": {{#required}}true{{/required}}{{^required}}false{{/required}}
+          {{/isDateTime}}
+          {{#isUuid}}
+          "type": "rest_framework.serializers.UUIDField",
+          "attrs": {},
+          "required": {{#required}}true{{/required}}{{^required}}false{{/required}}
+          {{/isUuid}}
+          {{#isEnum}}
+          "type": "site_utils.fields.MappedChoiceField",
+          "attrs": {
+            "mapping": {
+              {{#_enum}}
+              "MAPPING_FOR_{{.}}": "{{.}}"{{^-last}},{{/-last}}
+              {{/_enum}}
+            }
+          },
+          "required": {{#required}}true{{/required}}{{^required}}false{{/required}}
+          {{/isEnum}}
+          {{/items}}
+        }{{^-last}},{{/-last}}
+        {{/isArray}}
+        {{/schema}}
+        {{/isQueryParam}}
+        {{/allParams}}
+      }
+    },
+    {{/operation}}
+    {{/operations}}
+    {{/apis}}
+    {{/apiInfo}}
+  }[name];
+}
