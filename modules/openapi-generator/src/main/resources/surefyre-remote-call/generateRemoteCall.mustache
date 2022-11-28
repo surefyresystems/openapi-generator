@@ -206,15 +206,18 @@ function getModel(name) {
         "required": {{#required}}true{{/required}}{{^required}}false{{/required}}
         {{/isUuid}}
         {{#isEnum}}
-        "type": "site_utils.fields.MappedChoiceField",
-        "attrs": {
-          "mapping": {
-            {{#_enum}}
-            "MAPPING_FOR_{{.}}": "{{.}}"{{^-last}},{{/-last}}
-            {{/_enum}}
+        "child": {
+          "type": "site_utils.fields.MappedChoiceField",
+          "attrs": {
+            "mapping": {
+              {{#_enum}}
+              "MAPPING_FOR_{{.}}": "{{.}}"{{^-last}},{{/-last}}
+              {{/_enum}}
+            }
           }
         },
-        "required": {{#required}}true{{/required}}{{^required}}false{{/required}}
+        "required": {{#required}}true{{/required}}{{^required}}false{{/required}},
+        "attrs": {}
         {{/isEnum}}
         {{/items}}
       }{{^-last}},{{/-last}}
@@ -448,15 +451,18 @@ export function getOperation(name) {
           "required": {{#required}}true{{/required}}{{^required}}false{{/required}}
           {{/isUuid}}
           {{#isEnum}}
-          "type": "site_utils.fields.MappedChoiceField",
-          "attrs": {
-            "mapping": {
-              {{#_enum}}
-              "MAPPING_FOR_{{.}}": "{{.}}"{{^-last}},{{/-last}}
-              {{/_enum}}
+          "child": {
+            "type": "site_utils.fields.MappedChoiceField",
+            "attrs": {
+              "mapping": {
+                {{#_enum}}
+                "MAPPING_FOR_{{.}}": "{{.}}"{{^-last}},{{/-last}}
+                {{/_enum}}
+              }
             }
           },
-          "required": {{#required}}true{{/required}}{{^required}}false{{/required}}
+          "required": {{#required}}true{{/required}}{{^required}}false{{/required}},
+          "attrs": {}
           {{/isEnum}}
           {{/items}}
         }{{^-last}},{{/-last}}
@@ -661,15 +667,18 @@ export function getOperation(name) {
           "required": {{#required}}true{{/required}}{{^required}}false{{/required}}
           {{/isUuid}}
           {{#isEnum}}
-          "type": "site_utils.fields.MappedChoiceField",
-          "attrs": {
-            "mapping": {
-              {{#_enum}}
-              "MAPPING_FOR_{{.}}": "{{.}}"{{^-last}},{{/-last}}
-              {{/_enum}}
+          "child": {
+            "type": "site_utils.fields.MappedChoiceField",
+            "attrs": {
+              "mapping": {
+                {{#_enum}}
+                "MAPPING_FOR_{{.}}": "{{.}}"{{^-last}},{{/-last}}
+                {{/_enum}}
+              }
             }
           },
-          "required": {{#required}}true{{/required}}{{^required}}false{{/required}}
+          "required": {{#required}}true{{/required}}{{^required}}false{{/required}},
+          "attrs": {}
           {{/isEnum}}
           {{/items}}
         }{{^-last}},{{/-last}}
